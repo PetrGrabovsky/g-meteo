@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import geoReducer from './slices/geo-slice';
+import weatherReducer from './slices/weather-slice';
 
 export const store = configureStore({
   reducer: {
     geo: geoReducer,
+    weather: weatherReducer,
   },
 });
 
