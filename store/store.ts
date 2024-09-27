@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import geoReducer from './slices/geo-slice';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    geo: geoReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
