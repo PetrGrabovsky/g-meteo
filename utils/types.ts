@@ -14,4 +14,6 @@ interface WeatherDayRecord {
 export interface WeatherState {
   city: string;
   dailyRecords: WeatherDayRecord[];
+  loading: boolean;
+  error: string | null;
 }
