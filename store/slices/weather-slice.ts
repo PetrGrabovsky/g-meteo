@@ -1,17 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface WeatherDayRecord {
-  date: string;
-  temp: number;
-  humidity: number;
-  windSpeed: number;
-  icon: string;
-}
-
-interface WeatherState {
-  city: string;
-  dailyRecords: WeatherDayRecord[];
-}
+import { WeatherState } from '@/utils/types';
 
 const initialState: WeatherState = {
   city: '',
