@@ -4,6 +4,8 @@ import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { setSearchInput, setCitySuggestions } from '@/store/slices/city-slice';
 import { filterCities } from '@/store/thunks/filter-cities';
 import clsx from 'clsx';
+import { City } from '@/utils/weather-api-types';
+import { setCoordinates } from '@/store/slices/geo-slice';
 
 export default function CityInput() {
   const dispatch = useAppDispatch();
@@ -35,6 +37,14 @@ export default function CityInput() {
     dispatch(setCitySuggestions([]));
   };
 
+  const handleCityClick = (city: City) => {
+    dispatch(setCoordinates({ latitude: city.coord.lat, longitude: city.coord.lon }));
+    dispatch(setSearchInput(''));
+    dispatch(setCitySuggestions([]));
+
+    if (inputRef.current) inputRef.current.focus();
+  };
+
   return (
     <div className="relative w-48">
       <input
@@ -63,11 +73,14 @@ export default function CityInput() {
             {citySuggestions.map((city) => (
               <li
                 key={city.id}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  handleCityClick(city);
+                }}
                 className={clsx(
                   'cursor-pointer px-4 py-2 text-gray-700 transition-colors duration-200',
                   'hover:bg-blue-500 hover:text-white'
                 )}
-                onClick={() => dispatch(setSearchInput(city.name))}
               >
                 {city.name}
               </li>

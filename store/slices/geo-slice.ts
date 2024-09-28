@@ -22,7 +22,11 @@ const PRAGUE_COORDINATES: Coordinates = {
 const geoSlice = createSlice({
   name: 'geo',
   initialState,
-  reducers: {},
+  reducers: {
+    setCoordinates(state, action: PayloadAction<Coordinates>) {
+      state.coordinates = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCoordinates.pending, (state) => {
@@ -41,4 +45,5 @@ const geoSlice = createSlice({
   },
 });
 
+export const { setCoordinates } = geoSlice.actions;
 export default geoSlice.reducer;

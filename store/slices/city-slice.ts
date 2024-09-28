@@ -5,7 +5,6 @@ import { fetchAllCities } from '../thunks/fetch-all-cities';
 interface CityState {
   allCities: City[];
   citySuggestions: City[];
-  activeCity: City | null;
   searchInput: string;
   loading: boolean;
   error: string | null;
@@ -14,7 +13,6 @@ interface CityState {
 const initialState: CityState = {
   allCities: [],
   citySuggestions: [],
-  activeCity: null,
   searchInput: '',
   loading: false,
   error: null,
