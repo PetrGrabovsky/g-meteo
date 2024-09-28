@@ -9,7 +9,6 @@ import { useEffect } from 'react';
 export default function Home() {
   const dispatch = useAppDispatch();
   const coordinates = useAppSelector((state) => state.geo.coordinates);
-
   const city = useAppSelector((state) => state.weather.city);
 
   useEffect(() => {
