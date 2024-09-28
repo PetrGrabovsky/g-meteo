@@ -3,7 +3,7 @@ export interface Coordinates {
   longitude: number;
 }
 
-interface WeatherDayRecord {
+export interface WeatherDayRecord {
   date: string;
   temp: number;
   humidity: number;

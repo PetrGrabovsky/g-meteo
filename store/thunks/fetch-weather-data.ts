@@ -72,7 +72,7 @@ const processWeatherData = (data: WeatherForecastResponse): WeatherState['dailyR
       temp: calculateAverageValue(record.temps),
       humidity: calculateAverageValue(record.humidities),
       windSpeed: calculateAverageValue(record.windSpeeds),
-      icon: `https://openweathermap.org/img/wn/${getMostCommonIcon(record.icons)}@2x.png`,
+      icon: getMostCommonIcon(record.icons),
     };
   });
 };
