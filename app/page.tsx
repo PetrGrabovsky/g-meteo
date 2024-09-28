@@ -1,5 +1,6 @@
 'use client';
 
+import WeatherCard from '@/components/weather-card';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { fetchCoordinates } from '@/store/thunks/fetch-coordinates';
 import { fetchWeatherData } from '@/store/thunks/fetch-weather-data';
@@ -25,37 +26,14 @@ export default function Home() {
 
   return (
     <section>
-      {/* Zobrazení načítání souřadnic */}
-      {loadingCoordinates ? (
-        <p>Načítání polohy...</p>
-      ) : (
-        coordinates && (
-          <p>
-            Latitude: {coordinates.latitude}, Longitude: {coordinates.longitude}
-          </p>
-        )
-      )}
-
-      {/* Zobrazení počasí nebo chybové zprávy */}
-      {loadingWeather ? (
-        <p>Načítání počasí...</p>
-      ) : errorWeather ? (
-        <p style={{ color: 'red' }}>Chyba: {errorWeather}</p>
-      ) : (
-        weather.length > 0 && (
-          <div>
-            <h2>Počasí pro město {city}:</h2> {/* Zobrazení města */}
-            {weather.map((record) => (
-              <div key={record.date}>
-                <p>
-                  {record.date}: {record.temp}°C, Vítr: {record.windSpeed} m/s, Vlhkost: {record.humidity}%
-                </p>
-                <img src={record.icon} alt="Weather Icon" />
-              </div>
-            ))}
-          </div>
-        )
-      )}
+      <h2 className="mb-8 text-2xl font-bold drop-shadow-lg">Předpověď pro: {city}</h2>
+      <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:justify-center">
+        {weather.map((record) => (
+          <li key={record.date}>
+            <WeatherCard record={record} />
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
