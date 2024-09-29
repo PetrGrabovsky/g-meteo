@@ -1,5 +1,6 @@
 'use client';
 
+import TemperatureChart from '@/components/temperature-chart';
 import WeatherCardList from '@/components/weather-card-list';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { fetchCoordinates } from '@/store/thunks/fetch-coordinates';
@@ -40,6 +41,7 @@ export default function Home() {
         <h2 className="animate-fadeIn pb-4 text-xl font-bold drop-shadow-lg">
           Vývoj teplot pro: <span className="animate-pulse">{city}</span>
         </h2>
+        <TemperatureChart />
       </section>
     </>
   );
