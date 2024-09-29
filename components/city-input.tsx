@@ -19,7 +19,7 @@ export default function CityInput() {
     if (!allCities.length) {
       dispatch(fetchAllCities());
     }
-  }, [dispatch]);
+  }, [dispatch, allCities.length]);
 
   useEffect(() => {
     if (!loading && inputRef.current) {
