@@ -7,16 +7,12 @@ export default function WeatherCardList() {
   const todayDate = new Date().toISOString().split('T')[0];
   const [activeCard, setActiveCard] = useState<string>(todayDate);
 
-  const handleMouseOver = (date: string) => {
-    if (activeCard !== date) {
-      setActiveCard(date);
-    }
+  const handleMouseEnter = (date: string) => {
+    if (activeCard !== date) setActiveCard(date);
   };
 
   const handleMouseLeave = () => {
-    if (activeCard !== todayDate) {
-      setActiveCard(todayDate);
-    }
+    if (activeCard !== todayDate) setActiveCard(todayDate);
   };
 
   return (
@@ -26,8 +22,7 @@ export default function WeatherCardList() {
           <WeatherCard
             record={record}
             isActive={activeCard === record.date}
-            isToday={todayDate === record.date}
-            onMouseOver={() => handleMouseOver(record.date)}
+            onMouseEnter={() => handleMouseEnter(record.date)}
             onMouseLeave={handleMouseLeave}
           />
         </li>
