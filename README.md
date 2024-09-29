@@ -27,19 +27,19 @@ Aplikace podporuje poslední verze těchto prohlížečů:
 1.  Naklonujte tento repozitář:
 
 ```bash
-	git clone https://github.com/PetrGrabovsky/g-meteo.git
+git clone https://github.com/PetrGrabovsky/g-meteo.git
 ```
 
 2.  Přejděte do adresáře projektu:
 
 ```bash
-	cd g-meteo
+cd g-meteo
 ```
 
 3.  Nainstalujte závislosti:
 
 ```bash
-	npm install
+npm install
 ```
 
 ## Použití
@@ -47,7 +47,7 @@ Aplikace podporuje poslední verze těchto prohlížečů:
 1.  Spusťte aplikaci:
 
 ```bash
-	npm run dev
+npm run dev
 ```
 
 2.  Otevřete http://localhost:3000 ve vašem prohlížeči.
@@ -57,16 +57,17 @@ Aplikace podporuje poslední verze těchto prohlížečů:
 
 ```
 g-meteo/
-├── app/   							# Hlavní složka se stránkou Home a RootLayoutem
-├── components/   					# Složka pro komponenty
-├── public/     					# Složka pro statické soubory (ikony, manifest, city.list.json)
-├── store/							# Redux store složka
-│   ├── slices/  					# Redux slice soubory pro jednotlivé části stavu
-│   │   ├── city-slice.ts			# Slice pro správu stavu měst a vyhledávání
-│   │   ├── geo-slice.ts			# Slice pro správu geografických souřadnic
-│   │   └── weather-slice.ts		# Slice pro správu stavu předpovědi počasí
-│   └── thunks/ 					# Redux thunks pro API volání a filtrovávní měst
-└── utils/                    		# Utility funkce a pomocné soubory
+├── app/                     # Hlavní složka aplikace obsahující Home a RootLayout stránky
+├── components/              # Složka pro znovupoužitelné React komponenty
+├── public/                  # Složka pro statické soubory (ikony, manifest, city.list.json)
+├── store/                   # Složka pro Redux store
+│   ├── slices/              # Složka obsahující Redux slice soubory pro různé části stavu
+│   │   ├── city-slice.ts    # Slice pro správu stavu měst a vyhledávání
+│   │   ├── geo-slice.ts     # Slice pro správu geografických souřadnic (polohy)
+│   │   └── weather-slice.ts # Slice pro správu stavu předpovědi počasí
+│   └── thunks/              # Redux thunks pro API volání a asynchronní operace
+└── utils/                   # Utility funkce a pomocné soubory pro podporu aplikace
+
 ```
 
 ## Klíčové technologie
