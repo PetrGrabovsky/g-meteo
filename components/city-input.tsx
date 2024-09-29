@@ -46,7 +46,7 @@ export default function CityInput() {
   };
 
   return (
-    <div className="relative w-48">
+    <div className="relative w-48 animate-fadeIn">
       <input
         ref={inputRef}
         type="text"
@@ -66,7 +66,8 @@ export default function CityInput() {
       {citySuggestions.length > 0 && (
         <div
           className={clsx(
-            'absolute z-10 mt-2 w-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg'
+            'absolute z-10 mt-2 w-full animate-fadeIn overflow-hidden rounded-lg border border-gray-200 bg-white',
+            'shadow-lg'
           )}
         >
           <ul className="max-h-60">
@@ -79,7 +80,7 @@ export default function CityInput() {
                 }}
                 className={clsx(
                   'cursor-pointer px-4 py-2 text-gray-700 transition-colors duration-200',
-                  'hover:bg-blue-500 hover:text-white'
+                  'flex items-center justify-center hover:bg-blue-500 hover:text-white'
                 )}
               >
                 {city.name}
