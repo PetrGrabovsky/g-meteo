@@ -10,6 +10,7 @@ export default function Home() {
   const dispatch = useAppDispatch();
   const coordinates = useAppSelector((state) => state.geo.coordinates);
   const city = useAppSelector((state) => state.weather.city);
+  const weatherLoading = useAppSelector((state) => state.weather.loading);
 
   useEffect(() => {
     dispatch(fetchCoordinates());
@@ -19,10 +20,27 @@ export default function Home() {
     dispatch(fetchWeatherData());
   }, [dispatch, coordinates]);
 
+  if (weatherLoading) {
+    return (
+      <div className="flex flex-grow items-center justify-center">
+        <div className="animate-spin text-6xl">⏳</div>
+      </div>
+    );
+  }
+
   return (
-    <section>
-      <h2 className="mb-8 text-2xl font-bold drop-shadow-lg">Předpověď pro: {city}</h2>
-      <WeatherCardList />
-    </section>
+    <>
+      <section className="py-4">
+        <h2 className="animate-fadeIn pb-4 text-xl font-bold drop-shadow-lg">
+          Předpověď pro: <span className="animate-pulse">{city}</span>
+        </h2>
+        <WeatherCardList />
+      </section>
+      <section className="py-4">
+        <h2 className="animate-fadeIn pb-4 text-xl font-bold drop-shadow-lg">
+          Vývoj teplot pro: <span className="animate-pulse">{city}</span>
+        </h2>
+      </section>
+    </>
   );
 }

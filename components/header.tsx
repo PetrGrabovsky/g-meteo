@@ -11,7 +11,7 @@ export default function Header() {
           aria-hidden="true"
           className={clsx(
             'text-2xl font-bold uppercase tracking-wide transition-transform duration-200 hover:scale-110',
-            'flex cursor-default items-center space-x-1 hover:text-blue-300'
+            'flex animate-fadeIn cursor-default items-center space-x-1 hover:text-blue-300'
           )}
         >
           <Brand className="mt-1 h-10 w-10" primaryColor="text-gray-300" secondaryColor="text-green-500" />

@@ -8,7 +8,7 @@ export default function Footer() {
       )}
     >
       <div className="container text-right">
-        <p>&copy; 2024 Petr Grabovský</p>
+        <p className="animate-fadeIn">&copy; 2024 Petr Grabovský</p>
       </div>
     </footer>
   );

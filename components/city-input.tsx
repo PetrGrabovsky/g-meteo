@@ -60,7 +60,7 @@ export default function CityInput() {
           loading && 'cursor-not-allowed opacity-50',
           'w-full rounded-lg bg-blue-500 bg-opacity-50 p-2 text-white placeholder-white transition',
           'duration-200 focus:bg-opacity-100 focus:shadow-lg focus:outline-none focus:ring-4',
-          'text-center text-sm hover:scale-105 focus:scale-105 focus:ring-blue-400'
+          'animate-fadeIn text-center text-sm hover:scale-105 focus:scale-105 focus:ring-blue-400'
         )}
       />
       {citySuggestions.length > 0 && (

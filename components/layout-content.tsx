@@ -14,7 +14,7 @@ export default function LayoutContent({ children }: LayoutContentProps) {
   return (
     <Provider store={store}>
       <Header />
-      <main className="container flex-1 py-10 shadow-inner">{children}</main>
+      <main className="container flex flex-grow flex-col shadow-inner">{children}</main>
       <Footer />
     </Provider>
   );
