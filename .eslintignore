@@ -9,3 +9,4 @@ public/
 .env*
 globals.css
 *.json
+*.md

@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Gmeteo - Předpověď počasí na 6 dní
 
-## Getting Started
+**Gmeteo** je moderní aplikace pro předpověď počasí na 6 dní pro jakékoliv místo na světě. S aplikací Gmeteo můžete snadno zjistit aktuální i budoucí počasí a sledovat vývoj teplot pomocí přehledného grafu.
 
-First, run the development server:
+## Funkce
+
+1.  [x] Získání souřadnic aktuální polohy z geolokace.
+2.  [x] Načtení a zobrazení předpovědi počasí z OpenWeatherMap API
+3.  [x] Vyhledávání měst a zobrazení předpovědi pro vybrané místo
+4.  [x] Zobrazení vývoje teplot pomocí grafu
+
+## Požadavky
+
+- Node.js (verze 16 a vyšší)
+- NPM nebo Yarn
+
+## Podporované prohlížeče
+
+Aplikace podporuje poslední verze těchto prohlížečů:
+
+- **Google Chrome**
+- **Mozilla Firefox**
+- **Microsoft Edge**
+
+## Instalace
+
+1.  Naklonujte tento repozitář:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+	git clone https://github.com/PetrGrabovsky/g-meteo.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2.  Přejděte do adresáře projektu:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+	cd g-meteo
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3.  Nainstalujte závislosti:
 
-## Learn More
+```bash
+	npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Použití
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  Spusťte aplikaci:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+	npm run dev
+```
 
-## Deploy on Vercel
+2.  Otevřete http://localhost:3000 ve vašem prohlížeči.
+3.  Vyhledejte město v pravé horní části stránky, nebo nechte aplikaci použít vaši polohu pro zobrazení předpovědi počasí.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Struktura projektu
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+g-meteo/
+├── app/   							# Hlavní složka se stránkou Home a RootLayoutem
+├── components/   					# Složka pro komponenty
+├── public/     					# Složka pro statické soubory (ikony, manifest, city.list.json)
+├── store/							# Redux store složka
+│   ├── slices/  					# Redux slice soubory pro jednotlivé části stavu
+│   │   ├── city-slice.ts			# Slice pro správu stavu měst a vyhledávání
+│   │   ├── geo-slice.ts			# Slice pro správu geografických souřadnic
+│   │   └── weather-slice.ts		# Slice pro správu stavu předpovědi počasí
+│   └── thunks/ 					# Redux thunks pro API volání a filtrovávní měst
+└── utils/                    		# Utility funkce a pomocné soubory
+```
+
+## Klíčové technologie
+
+- [x] **Next.js**: React framework pro server-side rendering a statické generování stránek.
+- [x] **TypeScript**: Přidává typovou bezpečnost do JavaScriptu.
+- [x] **Tailwind CSS**: Moderní CSS framework pro rychlé a efektivní stylování komponent.
+- [x] **Redux**: Správa globálního stavu aplikace.
+- [x] **Chart.js**: Knihovna pro tvorbu grafů (vizualizace teplot).
+
+## Autor
+
+**Petr Grabovský**
+[GitHub](https://github.com/PetrGrabovsky)
