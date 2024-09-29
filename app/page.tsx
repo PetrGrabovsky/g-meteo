@@ -31,14 +31,14 @@ export default function Home() {
 
   return (
     <>
-      <section className="py-4">
-        <h2 className="animate-fadeIn pb-4 text-xl font-bold drop-shadow-lg">
+      <section className="py-8">
+        <h2 className="h2-style">
           Předpověď pro: <span className="animate-pulse">{city}</span>
         </h2>
         <WeatherCardList />
       </section>
-      <section className="py-4">
-        <h2 className="animate-fadeIn pb-4 text-xl font-bold drop-shadow-lg">
+      <section className="py-8">
+        <h2 className="h2-style">
           Vývoj teplot pro: <span className="animate-pulse">{city}</span>
         </h2>
         <TemperatureChart />

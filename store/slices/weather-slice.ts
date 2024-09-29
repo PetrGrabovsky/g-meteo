@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { WeatherState } from '@/utils/types';
 import { fetchWeatherData } from '../thunks/fetch-weather-data';
 

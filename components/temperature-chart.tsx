@@ -32,8 +32,8 @@ export default function TemperatureChart() {
           borderColor: 'rgba(75, 192, 192, 1)',
           backgroundColor: 'rgba(75, 192, 192, 0.2)',
           fill: true,
-          pointRadius: 7,
-          pointHoverRadius: 10,
+          pointRadius: 10,
+          pointHoverRadius: 15,
           pointHoverBackgroundColor: 'rgba(60, 155, 155, 1)',
           pointHoverBorderColor: 'rgba(55, 150, 150, 0.8)',
         },
@@ -52,7 +52,10 @@ export default function TemperatureChart() {
         tooltip: {
           displayColors: false,
           bodyFont: {
-            size: 16,
+            size: 17,
+          },
+          titleFont: {
+            size: 15,
           },
           callbacks: {
             label: (context: any) => `${context.raw} °C`,

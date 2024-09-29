@@ -13,7 +13,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-blue-700 bg-opacity-80 py-3 text-white shadow-md">
+    <header className="bg-blue-700 bg-opacity-80 py-4 text-white shadow-md">
       <div className="container flex items-center justify-between">
         <h1 className="sr-only">Gmeteo - Předpověď počasí</h1>
         <Link
@@ -26,7 +26,7 @@ export default function Header() {
             'flex animate-fadeIn cursor-pointer items-center space-x-1 hover:text-blue-300'
           )}
         >
-          <Brand className="mt-1 h-10 w-10" primaryColor="text-gray-300" secondaryColor="text-green-500" />
+          <Brand className="mt-1 h-10 w-10" primaryColor="text-white" secondaryColor="text-green-500" />
           <span>meteo</span>
         </Link>
         <CityInput />

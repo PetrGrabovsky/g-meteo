@@ -8,11 +8,11 @@ export default function WeatherCardList() {
   const [activeCard, setActiveCard] = useState<string>(todayDate);
 
   const handleMouseEnter = (date: string) => {
-    if (activeCard !== date) setActiveCard(date);
+    if (activeCard !== date) setActiveCard((prevState) => (prevState !== date ? date : prevState));
   };
 
   const handleMouseLeave = () => {
-    if (activeCard !== todayDate) setActiveCard(todayDate);
+    if (activeCard !== todayDate) setActiveCard((prevState) => (prevState !== todayDate ? todayDate : prevState));
   };
 
   return (

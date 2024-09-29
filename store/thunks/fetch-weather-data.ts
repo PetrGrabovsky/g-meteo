@@ -37,9 +37,7 @@ const fetchWeatherFromApi = async (
     `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
   );
 
-  if (!response.ok) {
-    throw new Error('Nepodařilo se načíst data o počasí');
-  }
+  if (!response.ok) throw new Error('Nepodařilo se načíst data o počasí');
 
   return response.json();
 };
@@ -55,7 +53,12 @@ const processWeatherData = (data: WeatherForecastResponse): WeatherState['dailyR
     const date = dt_txt.split(' ')[0];
 
     // Inicializace prázdné struktury pro každý den
-    processedRecords[date] = processedRecords[date] || { temps: [], humidities: [], windSpeeds: [], icons: [] };
+    processedRecords[date] = processedRecords[date] || {
+      temps: [],
+      humidities: [],
+      windSpeeds: [],
+      icons: [],
+    };
 
     // Přidání dat do struktury
     processedRecords[date].temps.push(main.temp);
