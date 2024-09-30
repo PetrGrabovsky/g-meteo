@@ -98,8 +98,8 @@ export const fetchWeatherData = createAsyncThunk(
         city: data.city.name,
         dailyRecords,
       };
-    } catch (error: any) {
-      return rejectWithValue(error.message || 'Nepodařilo se načíst data o počasí');
+    } catch {
+      return rejectWithValue('Nepodařilo se načíst data o počasí');
     }
   }
 );

@@ -5,7 +5,7 @@ import { fetchWeatherData } from '../thunks/fetch-weather-data';
 const initialState: WeatherState = {
   city: '',
   dailyRecords: [],
-  loading: false,
+  loading: true,
   error: null,
 };
 

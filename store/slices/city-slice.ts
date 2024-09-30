@@ -14,7 +14,7 @@ const initialState: CityState = {
   allCities: [],
   citySuggestions: [],
   searchInput: '',
-  loading: false,
+  loading: true,
   error: null,
 };
 

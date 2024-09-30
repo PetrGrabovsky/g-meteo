@@ -7,13 +7,16 @@ import clsx from 'clsx';
 import { City } from '@/utils/weather-api-types';
 import { setCoordinates } from '@/store/slices/geo-slice';
 
-export default function CityInput() {
+export default function CityAutocomplete() {
   const dispatch = useAppDispatch();
   const allCities = useAppSelector((state) => state.city.allCities);
-  const loading = useAppSelector((state) => state.city.loading);
+  const cityLoading = useAppSelector((state) => state.city.loading);
+  const weatherLoading = useAppSelector((state) => state.weather.loading);
   const searchInput = useAppSelector((state) => state.city.searchInput);
   const citySuggestions = useAppSelector((state) => state.city.citySuggestions);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const isLoading = cityLoading || weatherLoading;
 
   useEffect(() => {
     if (!allCities.length) {
@@ -22,10 +25,10 @@ export default function CityInput() {
   }, [dispatch, allCities.length]);
 
   useEffect(() => {
-    if (!loading && inputRef.current) {
+    if (!isLoading && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [loading]);
+  }, [isLoading]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchInput(e.target.value));
@@ -53,11 +56,11 @@ export default function CityInput() {
         value={searchInput}
         onChange={handleInputChange}
         onBlur={handleInputBlur}
-        placeholder={loading ? 'Načítám města...' : 'Zadejte město...'}
-        disabled={loading}
+        placeholder={cityLoading ? 'Načítám města...' : weatherLoading ? 'Načítám počasí...' : 'Zadejte město...'}
+        disabled={isLoading}
         maxLength={20}
         className={clsx(
-          loading && 'cursor-not-allowed opacity-50',
+          isLoading && 'cursor-not-allowed opacity-50',
           'w-full rounded-lg bg-blue-500 bg-opacity-50 p-2 text-white placeholder-white transition',
           'duration-200 focus:bg-opacity-100 focus:shadow-lg focus:outline-none focus:ring-4',
           'animate-fadeIn text-center text-sm hover:scale-105 focus:scale-105 focus:ring-blue-400'

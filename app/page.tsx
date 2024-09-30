@@ -12,6 +12,7 @@ export default function Home() {
   const coordinates = useAppSelector((state) => state.geo.coordinates);
   const city = useAppSelector((state) => state.weather.city);
   const weatherLoading = useAppSelector((state) => state.weather.loading);
+  const weatherError = useAppSelector((state) => state.weather.error);
 
   useEffect(() => {
     dispatch(fetchCoordinates());
@@ -21,10 +22,24 @@ export default function Home() {
     dispatch(fetchWeatherData());
   }, [dispatch, coordinates]);
 
-  if (weatherLoading) {
+  if (weatherError) {
     return (
       <div className="flex flex-grow items-center justify-center">
-        <div className="animate-spin text-6xl">⏳</div>
+        <div className="flex flex-col items-center justify-center space-y-2">
+          <span className="text-6xl">❌</span>
+          <p>{weatherError}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (weatherLoading || !coordinates || !city) {
+    return (
+      <div className="flex flex-grow items-center justify-center">
+        <div className="flex flex-col items-center justify-center space-y-2">
+          <span className="animate-spin text-6xl">⏳</span>
+          <p>Načítám data...</p>
+        </div>
       </div>
     );
   }

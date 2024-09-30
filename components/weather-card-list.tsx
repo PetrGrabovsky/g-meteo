@@ -4,25 +4,24 @@ import { useAppSelector } from '@/store/hooks';
 
 export default function WeatherCardList() {
   const dailyRecords = useAppSelector((state) => state.weather.dailyRecords);
-  const todayDate = new Date().toISOString().split('T')[0];
-  const [activeCard, setActiveCard] = useState<string>(todayDate);
+  const [activeCardIndex, setActiveCardIndex] = useState<number>(0);
 
-  const handleMouseEnter = (date: string) => {
-    if (activeCard !== date) setActiveCard((prevState) => (prevState !== date ? date : prevState));
+  const handleMouseEnter = (index: number) => {
+    if (activeCardIndex !== index) setActiveCardIndex((prevState) => (prevState !== index ? index : prevState));
   };
 
   const handleMouseLeave = () => {
-    if (activeCard !== todayDate) setActiveCard((prevState) => (prevState !== todayDate ? todayDate : prevState));
+    setActiveCardIndex(0);
   };
 
   return (
     <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:justify-center">
-      {dailyRecords.map((record) => (
-        <li key={record.date}>
+      {dailyRecords.map((record, index) => (
+        <li key={index}>
           <WeatherCard
             record={record}
-            isActive={activeCard === record.date}
-            onMouseEnter={() => handleMouseEnter(record.date)}
+            isActive={activeCardIndex === index}
+            onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave}
           />
         </li>

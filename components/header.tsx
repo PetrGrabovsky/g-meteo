@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import CityInput from './city-input';
+import CityAutocomplete from './city-autocomplete';
 import Brand from './brand';
 import Link from 'next/link';
 import { useAppDispatch } from '@/store/hooks';
@@ -29,7 +29,7 @@ export default function Header() {
           <Brand className="mt-1 h-10 w-10" primaryColor="text-white" secondaryColor="text-green-500" />
           <span>meteo</span>
         </Link>
-        <CityInput />
+        <CityAutocomplete />
       </div>
     </header>
   );

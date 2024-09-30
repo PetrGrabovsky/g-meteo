@@ -10,7 +10,7 @@ interface GeoState {
 
 const initialState: GeoState = {
   coordinates: null,
-  loading: false,
+  loading: true,
   error: null,
 };
 
