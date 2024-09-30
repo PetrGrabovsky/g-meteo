@@ -1,13 +1,13 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Gmeteo - předpověď počasí na 6 dní pro celý svět',
+  title: 'Gmeteo - předpověď počasí na 5 dní pro celý svět',
   description:
-    'S aplikací Gmeteo získáte přesnou a aktuální předpověď počasí na 6 dní pro jakékoliv místo na světě. Zadejte své město a zjistěte více o počasí.',
+    'S aplikací Gmeteo získáte přesnou a aktuální předpověď počasí na 5 dní pro libovolné místo na světě. Stačí zadat své město nebo povolit určování polohy a okamžitě se dozvíte, jaké počasí vás čeká.',
   keywords: [
     'počasí',
     'předpověď',
-    '6denní předpověď',
+    '5ti denní předpověď',
     'Gmeteo',
     'předpověď počasí',
     'světové počasí',
@@ -20,10 +20,10 @@ export const metadata: Metadata = {
       url: 'https://github.com/PetrGrabovsky',
     },
   ],
-  viewport: 'width=device-width, initial-scale=1',
   openGraph: {
-    title: 'Gmeteo - Předpověď počasí na 6 dní pro celý svět',
-    description: 'Získejte přesnou předpověď počasí na 6 dní pro jakékoliv místo na světě s aplikací Gmeteo.',
+    title: 'Gmeteo - Předpověď počasí na 5 dní pro celý svět',
+    description:
+      'S aplikací Gmeteo získáte přesnou a aktuální předpověď počasí na 5 dní pro libovolné místo na světě. Stačí zadat své město nebo povolit určování polohy a okamžitě se dozvíte, jaké počasí vás čeká.',
     url: 'https://g-meteo-eight.vercel.app/',
     type: 'website',
   },
