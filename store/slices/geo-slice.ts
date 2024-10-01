@@ -15,8 +15,8 @@ const initialState: GeoState = {
 };
 
 const PRAGUE_COORDINATES: Coordinates = {
-  latitude: 50.0755,
-  longitude: 14.4378,
+  latitude: 50.083328,
+  longitude: 14.46667,
 };
 
 const geoSlice = createSlice({
