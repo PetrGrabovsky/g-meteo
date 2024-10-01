@@ -53,6 +53,7 @@ const WeatherCard: React.FC<WeatherCardProps> = React.memo(({ record, isActive, 
             alt={`Ikona počasí: ${translatedDescription}`}
             width={100}
             height={100}
+            priority
             className="h-24 w-24"
           />
           <p
