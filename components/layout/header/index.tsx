@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import CityAutocomplete from '@/components/layout-content/header/city-autocomplete';
+import CityAutocomplete from './city-autocomplete';
 import Brand from './brand';
 import Link from 'next/link';
 import { useAppDispatch } from '@/store/hooks';

@@ -1,7 +1,7 @@
 'use client';
 
-import TemperatureChart from '@/components/temperature-chart';
-import WeatherCardList from '@/components/weather-card-list';
+import TemperatureChart from '@/components/home/temperature-chart';
+import WeatherCardList from '@/components/home/weather-card-list';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { fetchCoordinates } from '@/store/thunks/fetch-coordinates';
 import { fetchWeatherData } from '@/store/thunks/fetch-weather-data';

@@ -10,7 +10,7 @@ interface LayoutContentProps {
   children: ReactNode;
 }
 
-export default function LayoutContent({ children }: LayoutContentProps) {
+export default function Layout({ children }: LayoutContentProps) {
   return (
     <Provider store={store}>
       <Header />
