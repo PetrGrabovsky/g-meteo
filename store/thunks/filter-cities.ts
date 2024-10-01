@@ -9,7 +9,7 @@ const filterCitiesByInput = (allCities: City[], searchInput: string): City[] => 
 
   if (!trimmedSearchInput) return [];
 
-  return allCities.filter((city) => city.name.toLowerCase().startsWith(trimmedSearchInput)).slice(0, 5);
+  return allCities.filter((city) => city.name.toLowerCase().startsWith(trimmedSearchInput)).slice(0, 10);
 };
 
 // Debounced funkce pro optimalizaci výkonu
