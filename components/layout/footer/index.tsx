@@ -1,8 +1,10 @@
 import clsx from 'clsx';
 import { useDetectScroll } from '@/hooks/use-detect-scroll';
+import { useDetectMobile } from '@/hooks/use-detect-mobile';
 
 export default function Footer() {
   useDetectScroll();
+  useDetectMobile();
 
   return (
     <footer
