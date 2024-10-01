@@ -11,10 +11,10 @@ export const getDescriptionFromIcon = (icon: string): string => {
   const iconCode = icon.slice(0, 2);
 
   const descriptions: Record<string, string> = {
-    '01': 'jasná obloha',
-    '02': 'málo mraků',
-    '03': 'rozptýlená oblačnost',
-    '04': 'zatažená obloha',
+    '01': 'jasno',
+    '02': 'polojasno',
+    '03': 'oblačno',
+    '04': 'zataženo',
     '09': 'přeháňky',
     '10': 'déšť',
     '11': 'bouřka',
