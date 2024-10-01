@@ -1,6 +1,9 @@
 import clsx from 'clsx';
+import { useDetectScroll } from '@/hooks/use-detect-scroll';
 
 export default function Footer() {
+  useDetectScroll();
+
   return (
     <footer
       className={clsx(
