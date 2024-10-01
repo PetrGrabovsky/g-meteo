@@ -17,7 +17,8 @@ export default function Header() {
   return (
     <header
       className={clsx(
-        isScrolled && 'sticky top-0 animate-fadeInDown bg-opacity-70 shadow-lg backdrop-blur-md backdrop-filter',
+        isScrolled &&
+          'sticky top-0 animate-fadeInDown bg-blue-950 bg-opacity-50 shadow-lg backdrop-blur-md backdrop-filter',
         'z-50 bg-blue-700 py-4 text-white shadow-md transition-all duration-500 ease-in-out'
       )}
     >

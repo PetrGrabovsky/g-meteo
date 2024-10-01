@@ -20,7 +20,7 @@ export default function WeatherCardList({ dailyWeatherRecords }: WeatherCardList
   return (
     <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:justify-center">
       {dailyWeatherRecords.map((record, index) => (
-        <li key={index}>
+        <li key={index} role="listitem" aria-selected={activeCardIndex === index}>
           <WeatherCard
             record={record}
             isActive={activeCardIndex === index}

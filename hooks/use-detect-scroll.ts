@@ -3,21 +3,23 @@ import { setIsScrolled } from '@/store/slices/ui-slice';
 import { useEffect } from 'react';
 import { throttle } from 'lodash';
 
-const SCROLL_THRESHOLD = 100;
+const SCROLL_THRESHOLD = 300;
 
-export const useDetectScroll = () => {
+export const useDetectScroll = (isMobile: boolean) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const handleScroll = throttle(() => {
-      const isScrolled = window.scrollY > SCROLL_THRESHOLD;
-      dispatch(setIsScrolled(isScrolled));
-    }, 300);
+    if (isMobile) {
+      const handleScroll = throttle(() => {
+        const isScrolled = window.scrollY > SCROLL_THRESHOLD;
+        dispatch(setIsScrolled(isScrolled));
+      }, 300);
 
-    handleScroll();
+      handleScroll();
 
-    window.addEventListener('scroll', handleScroll);
+      window.addEventListener('scroll', handleScroll);
 
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [dispatch]);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [dispatch, isMobile]);
 };

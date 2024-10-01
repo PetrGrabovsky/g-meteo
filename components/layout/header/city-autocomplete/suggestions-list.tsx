@@ -1,27 +1,29 @@
 import clsx from 'clsx';
-import { useAppSelector, useAppDispatch } from '@/store/hooks';
-import { useRef } from 'react';
+import { useAppDispatch } from '@/store/hooks';
 import { setCoordinates } from '@/store/slices/geo-slice';
 import { setSearchInput, setCitySuggestions } from '@/store/slices/city-slice';
 import { City } from '@/utils/weather-api-types';
 
-export default function SuggestionsList() {
+interface SuggestionsListProps {
+  citySuggestions: City[];
+}
+
+export default function SuggestionsList({ citySuggestions }: SuggestionsListProps) {
   const dispatch = useAppDispatch();
-  const citySuggestions = useAppSelector((state) => state.city.citySuggestions);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleCityClick = (city: City) => {
     dispatch(setCoordinates({ latitude: city.coord.lat, longitude: city.coord.lon }));
     dispatch(setSearchInput(''));
     dispatch(setCitySuggestions([]));
-
-    if (inputRef.current) inputRef.current.focus();
   };
 
   return (
     <>
       {citySuggestions.length > 0 && (
         <div
+          id="citySuggestions"
+          role="listbox"
+          aria-labelledby="cityInput"
           className={clsx(
             'absolute z-10 mt-2 w-full animate-fadeIn overflow-hidden rounded-lg border border-gray-200 bg-white',
             'shadow-lg'
@@ -31,6 +33,8 @@ export default function SuggestionsList() {
             {citySuggestions.map((city) => (
               <li
                 key={city.id}
+                role="option"
+                aria-selected={false}
                 onMouseDown={(e) => {
                   e.preventDefault();
                   handleCityClick(city);

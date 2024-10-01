@@ -6,6 +6,7 @@ import SuggestionsList from './suggestions-list';
 
 export default function CityAutocomplete() {
   const dispatch = useAppDispatch();
+  const citySuggestions = useAppSelector((state) => state.city.citySuggestions);
   const allCities = useAppSelector((state) => state.city.allCities);
 
   useEffect(() => {
@@ -13,9 +14,9 @@ export default function CityAutocomplete() {
   }, [dispatch, allCities.length]);
 
   return (
-    <div className="relative w-48 animate-fadeIn">
-      <CityInput />
-      <SuggestionsList />
+    <div role="search" aria-label="Vyhledávání měst" className="relative w-48 animate-fadeIn">
+      <CityInput citySuggestions={citySuggestions} />
+      <SuggestionsList citySuggestions={citySuggestions} />
     </div>
   );
 }

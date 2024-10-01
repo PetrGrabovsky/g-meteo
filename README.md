@@ -1,6 +1,12 @@
 # Gmeteo - Předpověď počasí na 6 dní
 
-**Gmeteo** je moderní aplikace pro předpověď počasí na 6 dní pro jakékoliv místo na světě. S aplikací Gmeteo můžete snadno zjistit aktuální i budoucí počasí a sledovat vývoj teplot pomocí přehledného grafu.
+**Gmeteo** je moderní aplikace pro předpověď počasí na 5 dní pro jakékoliv místo na světě. Stačí zadat své město nebo povolit určování polohy a okamžitě se dozvíte, jaké počasí vás čeká.
+
+## Demo
+
+Aplikace je nasazená a dostupná online na následující adrese:
+
+[**Gmeteo - Předpověď počasí**](https://g-meteo-eight.vercel.app)
 
 ## Funkce
 
@@ -57,17 +63,22 @@ npm run dev
 
 ```
 g-meteo/
-├── app/                     # Hlavní složka aplikace obsahující Home a RootLayout stránky
-├── components/              # Složka pro znovupoužitelné React komponenty
-├── public/                  # Složka pro statické soubory (ikony, manifest, city.list.json)
-├── store/                   # Složka pro Redux store
-│   ├── slices/              # Složka obsahující Redux slice soubory pro různé části stavu
-│   │   ├── city-slice.ts    # Slice pro správu stavu měst a vyhledávání
-│   │   ├── geo-slice.ts     # Slice pro správu geografických souřadnic (polohy)
-│   │   └── weather-slice.ts # Slice pro správu stavu předpovědi počasí
-│   └── thunks/              # Redux thunks pro API volání a asynchronní operace
-└── utils/                   # Utility funkce a pomocné soubory pro podporu aplikace
-
+├── app/                          # Hlavní složka aplikace obsahující Home a RootLayout stránky
+├── components/                   # Složka pro komponenty
+├── public/                       # Složka pro statické soubory (ikony, manifest, city.list.json)
+├── hooks/                        # Složka pro custom hooky
+├── store/                        # Složka pro Redux store
+│   ├── slices/                   # Složka obsahující Redux slice soubory pro různé části stavu
+│   │   ├── ui-slice.ts           # Slice pro správu stavu uživatelského rozhraní
+│   │   ├── city-slice.ts         # Slice pro správu stavu měst a vyhledávání
+│   │   ├── geo-slice.ts          # Slice pro správu geografických souřadnic (polohy)
+│   │   └── weather-slice.ts      # Slice pro správu stavu předpovědi počasí
+│   └── thunks/                   # Redux thunks pro API volání a asynchronní operace
+│       ├── fetch-all-cities.ts   # Thunk pro načtení všech dostupných měst
+│       ├── fetch-coordinates.ts  # Thunk pro získání geografických souřadnic uživatele
+│       ├── fetch-weather-data.ts # Thunk pro načtení dat o počasí na základě souřadnic
+│       └── filter-cities.ts      # Thunk pro filtrování měst na základě vstupu uživatele
+└── utils/                        # Utility funkce a pomocné soubory pro podporu aplikace
 ```
 
 ## Klíčové technologie

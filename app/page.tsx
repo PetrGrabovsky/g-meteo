@@ -47,16 +47,26 @@ export default function Home() {
 
   return (
     <>
-      <section className="py-8">
-        <h2 className="h2-style">
-          Předpověď pro: <span className="animate-pulse">{cityName}</span>
-        </h2>
+      <section aria-label="Seznam karet s předpovědí počasí" className="py-8">
+        <header>
+          <h2 className="h2-style">
+            Předpověď pro:{' '}
+            <span aria-live="polite" className="animate-pulse">
+              {cityName}
+            </span>
+          </h2>
+        </header>
         <WeatherCardList dailyWeatherRecords={dailyWeatherRecords} />
       </section>
-      <section className="py-8">
-        <h2 className="h2-style">
-          Vývoj teplot pro: <span className="animate-pulse">{cityName}</span>
-        </h2>
+      <section aria-label="Graf vývoje teplot" className="py-8">
+        <header>
+          <h2 className="h2-style">
+            Vývoj teplot pro:{' '}
+            <span aria-live="polite" className="animate-pulse">
+              {cityName}
+            </span>
+          </h2>
+        </header>
         <TemperatureChart dailyWeatherRecords={dailyWeatherRecords} />
       </section>
     </>

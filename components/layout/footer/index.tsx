@@ -1,10 +1,12 @@
 import clsx from 'clsx';
 import { useDetectScroll } from '@/hooks/use-detect-scroll';
 import { useDetectMobile } from '@/hooks/use-detect-mobile';
+import { useAppSelector } from '@/store/hooks';
 
 export default function Footer() {
-  useDetectScroll();
   useDetectMobile();
+  const isMobile = useAppSelector((state) => state.ui.isMobile);
+  useDetectScroll(isMobile);
 
   return (
     <footer
