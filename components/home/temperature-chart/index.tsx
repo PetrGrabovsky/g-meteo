@@ -1,5 +1,5 @@
 import { Line } from 'react-chartjs-2';
-import { useAppSelector } from '@/store/hooks';
+import { WeatherDayRecord } from '@/utils/types';
 import { useMemo } from 'react';
 import {
   Chart as ChartJS,
@@ -14,12 +14,14 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-export default function TemperatureChart() {
-  const dailyRecords = useAppSelector((state) => state.weather.dailyRecords);
+interface TemperatureChartProps {
+  dailyWeatherRecords: WeatherDayRecord[];
+}
 
+export default function TemperatureChart({ dailyWeatherRecords }: TemperatureChartProps) {
   const labels = useMemo(
-    () => dailyRecords.map((record) => new Date(record.date).toLocaleDateString('cs-CZ', { weekday: 'long' })),
-    [dailyRecords]
+    () => dailyWeatherRecords.map((record) => new Date(record.date).toLocaleDateString('cs-CZ', { weekday: 'long' })),
+    [dailyWeatherRecords]
   );
 
   const data = useMemo(
@@ -28,7 +30,7 @@ export default function TemperatureChart() {
       datasets: [
         {
           label: 'Teplota (°C)',
-          data: dailyRecords.map((record) => record.temp),
+          data: dailyWeatherRecords.map((record) => record.temp),
           borderColor: 'rgba(75, 192, 192, 1)',
           backgroundColor: 'rgba(75, 192, 192, 0.2)',
           fill: true,
@@ -39,7 +41,7 @@ export default function TemperatureChart() {
         },
       ],
     }),
-    [labels, dailyRecords]
+    [labels, dailyWeatherRecords]
   );
 
   const options = useMemo(

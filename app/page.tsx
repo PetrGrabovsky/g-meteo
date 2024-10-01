@@ -10,8 +10,9 @@ import { useEffect } from 'react';
 export default function Home() {
   const dispatch = useAppDispatch();
   const coordinates = useAppSelector((state) => state.geo.coordinates);
-  const city = useAppSelector((state) => state.weather.city);
+  const cityName = useAppSelector((state) => state.weather.city);
   const weatherLoading = useAppSelector((state) => state.weather.loading);
+  const dailyWeatherRecords = useAppSelector((state) => state.weather.dailyRecords);
   const weatherError = useAppSelector((state) => state.weather.error);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function Home() {
     );
   }
 
-  if (weatherLoading || !coordinates || !city) {
+  if (weatherLoading || !coordinates) {
     return (
       <div className="flex flex-grow items-center justify-center">
         <div className="flex flex-col items-center justify-center space-y-2">
@@ -48,15 +49,15 @@ export default function Home() {
     <>
       <section className="py-8">
         <h2 className="h2-style">
-          Předpověď pro: <span className="animate-pulse">{city}</span>
+          Předpověď pro: <span className="animate-pulse">{cityName}</span>
         </h2>
-        <WeatherCardList />
+        <WeatherCardList dailyWeatherRecords={dailyWeatherRecords} />
       </section>
       <section className="py-8">
         <h2 className="h2-style">
-          Vývoj teplot pro: <span className="animate-pulse">{city}</span>
+          Vývoj teplot pro: <span className="animate-pulse">{cityName}</span>
         </h2>
-        <TemperatureChart />
+        <TemperatureChart dailyWeatherRecords={dailyWeatherRecords} />
       </section>
     </>
   );
