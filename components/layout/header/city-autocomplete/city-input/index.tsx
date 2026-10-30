@@ -92,8 +92,8 @@ export default function CityInput({
         aria-controls="citySuggestions"
         aria-activedescendant={selectedIndex !== null ? `suggestion-${selectedIndex}` : undefined}
         className={clsx(
-          'w-full rounded-lg bg-blue-500 bg-opacity-50 p-2 text-white placeholder-white transition',
-          'duration-200 focus:bg-opacity-100 focus:shadow-lg focus:outline-none focus:ring-4',
+          'w-full rounded-lg bg-blue-500/50 p-2 text-white transition placeholder:text-white',
+          'duration-200 focus:bg-blue-500 focus:shadow-lg focus:ring-4 focus:outline-hidden',
           'animate-fadeIn text-center text-sm hover:scale-105 focus:scale-105 focus:ring-blue-400',
           'disabled:cursor-not-allowed disabled:opacity-50'
         )}

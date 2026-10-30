@@ -7,8 +7,8 @@ coverage/
 public/
 
 # Ignorování specifických souborů
-package-lock.json
 yarn.lock
+pnpm-lock.yaml
 
 # Ignorování generovaných souborů
 *.min.js

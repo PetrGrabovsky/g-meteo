@@ -1,0 +1,6 @@
+allowBuilds:
+  # Prebuilt binary comes from @img/sharp-*, the install script is not needed.
+  sharp: false
+  # Prebuilt binary comes from @unrs/resolver-binding-*, the install script
+  # only downloads it when that is missing.
+  unrs-resolver: false

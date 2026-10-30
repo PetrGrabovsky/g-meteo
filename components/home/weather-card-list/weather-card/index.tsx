@@ -28,9 +28,9 @@ const WeatherCard: React.FC<WeatherCardProps> = React.memo(({ record, isActive, 
       tabIndex={0}
       aria-label={`Předpověď na ${fullDate}, ${translatedDescription}, teplota ${record.temp} °C, vlhkost ${record.humidity}%`}
       className={clsx(
-        isActive ? 'scale-105 transform bg-opacity-30 shadow-lg' : 'hover:scale-105 hover:bg-opacity-30',
+        isActive ? 'scale-105 bg-white/30 shadow-lg' : 'bg-white/20 hover:scale-105 hover:bg-white/30',
         isDateToday && 'text-blue-700',
-        'animate-fadeIn cursor-pointer rounded-lg bg-white bg-opacity-20 p-6 shadow-md transition-transform',
+        'animate-fadeIn cursor-pointer rounded-lg p-6 shadow-md transition-transform',
         'duration-200'
       )}
     >
@@ -42,7 +42,7 @@ const WeatherCard: React.FC<WeatherCardProps> = React.memo(({ record, isActive, 
           {fullDate}
         </time>
       </header>
-      <hr className="my-3 border-t border-white border-opacity-20" />
+      <hr className="my-3 border-t border-white/20" />
       <div className="mb-4 flex items-center justify-between sm:flex-col sm:justify-center">
         <p className="mb-1 text-4xl font-bold" aria-live="polite">
           {record.temp}°C

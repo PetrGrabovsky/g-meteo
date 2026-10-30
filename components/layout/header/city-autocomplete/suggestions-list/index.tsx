@@ -62,7 +62,7 @@ export default function SuggestionsList({ citySuggestions, selectedIndex, handle
                 <span className="w-full text-left">{city.name}</span>
                 <div
                   className={clsx(
-                    'ml-2 flex-shrink-0 rounded-full bg-blue-500 text-white',
+                    'ml-2 shrink-0 rounded-full bg-blue-500 text-white',
                     'flex h-8 w-8 items-center justify-center text-xs font-bold'
                   )}
                 >

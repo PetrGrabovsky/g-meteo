@@ -13,7 +13,7 @@ export const fetchCoordinates = createAsyncThunk<Coordinates, void, { rejectValu
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         };
-      } catch (error) {
+      } catch {
         return rejectWithValue('Nelze získat polohu uživatele');
       }
     } else {

@@ -16,7 +16,7 @@ export const fetchAllCities = createAsyncThunk('city/fetchAllCities', async (_, 
 
     const data: City[] = await response.json();
     return data;
-  } catch (error: any) {
-    return rejectWithValue(error.message);
+  } catch (error) {
+    return rejectWithValue(error instanceof Error ? error.message : 'Nepodařilo se načíst města');
   }
 });

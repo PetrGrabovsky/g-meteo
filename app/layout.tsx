@@ -30,7 +30,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={clsx(
           inter.className,
-          'flex min-h-screen flex-col bg-gradient-to-b from-blue-500 to-blue-900 text-white antialiased'
+          'flex min-h-screen flex-col bg-linear-to-b from-blue-500 to-blue-900 text-white antialiased'
         )}
       >
         <Layout>{children}</Layout>

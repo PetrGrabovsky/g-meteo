@@ -25,7 +25,7 @@ export default function Home() {
 
   if (weatherError) {
     return (
-      <div className="flex flex-grow items-center justify-center">
+      <div className="flex grow items-center justify-center">
         <div className="flex flex-col items-center justify-center space-y-2">
           <span className="text-6xl">❌</span>
           <p>{weatherError}</p>
@@ -36,7 +36,7 @@ export default function Home() {
 
   if (weatherLoading || !coordinates) {
     return (
-      <div className="flex flex-grow items-center justify-center">
+      <div className="flex grow items-center justify-center">
         <div className="flex flex-col items-center justify-center space-y-2">
           <span className="animate-spin text-6xl">⏳</span>
           <p>Načítám data...</p>

@@ -19,21 +19,20 @@ export default function CityAutocomplete() {
     if (!allCities.length) dispatch(fetchAllCities());
   }, [dispatch, allCities.length]);
 
-  // Přidá event listener pro kliknutí mimo komponentu
+  // Kliknutí mimo komponentu uzavře návrhy
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        dispatch(setSearchInput(''));
+        dispatch(setCitySuggestions([]));
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
-
-  // Kliknutí mimo komponentu, uzavře návrhy
-  const handleClickOutside = (event: MouseEvent) => {
-    if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-      dispatch(setSearchInput(''));
-      dispatch(setCitySuggestions([]));
-    }
-  };
+  }, [dispatch]);
 
   // Zpracování výběru města
   const handleCitySelect = (city: City) => {

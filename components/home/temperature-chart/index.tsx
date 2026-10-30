@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
   Filler,
+  type TooltipItem,
 } from 'chart.js';
 
 ChartJS.register(CategoryScale, Filler, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -61,7 +62,7 @@ export default function TemperatureChart({ dailyWeatherRecords }: TemperatureCha
             size: 15,
           },
           callbacks: {
-            label: (context: any) => `${context.raw} °C`,
+            label: (context: TooltipItem<'line'>) => `${context.raw} °C`,
           },
         },
       },

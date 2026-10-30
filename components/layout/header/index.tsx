@@ -17,9 +17,10 @@ export default function Header() {
   return (
     <header
       className={clsx(
-        isScrolled &&
-          'sticky top-0 animate-fadeInDown bg-blue-950 bg-opacity-50 shadow-lg backdrop-blur-md backdrop-filter',
-        'z-50 bg-blue-700 py-4 text-white shadow-md transition-all duration-500 ease-in-out'
+        isScrolled
+          ? 'sticky top-0 animate-fadeInDown bg-blue-950/50 shadow-lg backdrop-blur-md'
+          : 'bg-blue-700 shadow-md',
+        'z-50 py-4 text-white transition-all duration-500 ease-in-out'
       )}
     >
       <div className="container flex items-center justify-between">
@@ -30,7 +31,7 @@ export default function Header() {
           passHref
           aria-label="Gmeteo - Domovská stránka"
           className={clsx(
-            'text-2xl font-bold uppercase tracking-wide transition-transform duration-200 hover:scale-110',
+            'text-2xl font-bold tracking-wide uppercase transition-transform duration-200 hover:scale-110',
             'z-50 flex animate-fadeIn cursor-pointer items-center space-x-1 hover:text-blue-300'
           )}
         >

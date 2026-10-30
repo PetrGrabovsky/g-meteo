@@ -12,9 +12,7 @@ export default function Footer() {
 
   return (
     <footer
-      className={clsx(
-        'mt-auto rounded-t-lg bg-gradient-to-t from-blue-900 to-blue-700 py-6 text-gray-300 shadow-inner'
-      )}
+      className={clsx('mt-auto rounded-t-lg bg-linear-to-t from-blue-900 to-blue-700 py-6 text-gray-300 shadow-inner')}
     >
       <div className="container flex items-center justify-start text-right">
         <Link target="_blank" href="https://github.com/PetrGrabovsky" passHref>
