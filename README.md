@@ -1,95 +1,56 @@
-# Gmeteo - Předpověď počasí na 6 dní
+# Gmeteo
 
-**Gmeteo** je moderní aplikace pro předpověď počasí na 5 dní pro jakékoliv místo na světě. Stačí zadat své město nebo povolit určování polohy a okamžitě se dozvíte, jaké počasí vás čeká.
+Předpověď počasí na 5 dní pro libovolné město na světě. Po otevření ukáže Prahu, a pokud povolíte polohu, přepne se na místo, kde jste. Jiné město najdete přes vyhledávání v hlavičce.
 
-## Demo
+Aplikace běží na [g-meteo-eight.vercel.app](https://g-meteo-eight.vercel.app).
 
-Aplikace je nasazená a dostupná online na následující adrese:
+![Gmeteo](docs/screenshot.png)
 
-[**Gmeteo - Předpověď počasí**](https://g-meteo-eight.vercel.app)
+## Co umí
 
-## Funkce
+- předpověď na 5 dní: denní a noční teplota, vlhkost, vítr a ikona počasí
+- graf s průběhem maximálních a minimálních teplot
+- vyhledávání ve zhruba 200 000 městech, funguje i bez diakritiky („usti“ najde Ústí nad Labem)
+- ovládání vyhledávání z klávesnice (šipky, Enter, Esc)
 
-1.  [x] Získání souřadnic aktuální polohy z geolokace.
-2.  [x] Načtení a zobrazení předpovědi počasí z OpenWeatherMap API
-3.  [x] Vyhledávání měst a zobrazení předpovědi pro vybrané místo
-4.  [x] Zobrazení vývoje teplot pomocí grafu
+## Technologie
 
-## Požadavky
+Next.js 16 (App Router), React 19, TypeScript, Redux Toolkit, Tailwind CSS 4 a Chart.js. Data o počasí jsou z [OpenWeatherMap](https://openweathermap.org/).
 
-- Node.js (verze 16 a vyšší)
-- NPM nebo Yarn
+Předpověď i vyhledávání měst jdou přes API routy v Next.js (`app/api/forecast`, `app/api/cities`). API klíč tak zůstává na serveru a prohlížeč nemusí stahovat celý seznam měst, který má přes 40 MB.
 
-## Podporované prohlížeče
+## Spuštění
 
-Aplikace podporuje poslední verze těchto prohlížečů:
-
-- **Google Chrome**
-- **Mozilla Firefox**
-- **Microsoft Edge**
-
-## Instalace
-
-1.  Naklonujte tento repozitář:
+Potřebujete Node.js 20.9 nebo novější, [pnpm](https://pnpm.io/) a API klíč z OpenWeatherMap (stačí bezplatný).
 
 ```bash
 git clone https://github.com/PetrGrabovsky/g-meteo.git
-```
-
-2.  Přejděte do adresáře projektu:
-
-```bash
 cd g-meteo
+pnpm install
+cp .env.example .env.local
 ```
 
-3.  Nainstalujte závislosti:
+Do `.env.local` doplňte svůj klíč do `WEATHER_API_KEY` a spusťte vývojový server:
 
 ```bash
-npm install
+pnpm dev
 ```
 
-## Použití
+Aplikace poběží na [localhost:3000](http://localhost:3000).
 
-1.  Spusťte aplikaci:
-
-```bash
-npm run dev
-```
-
-2.  Otevřete http://localhost:3000 ve vašem prohlížeči.
-3.  Vyhledejte město v pravé horní části stránky, nebo nechte aplikaci použít vaši polohu pro zobrazení předpovědi počasí.
+Další skripty: `pnpm build` (produkční build), `pnpm lint`, `pnpm typecheck` a `pnpm format`.
 
 ## Struktura projektu
 
 ```
-g-meteo/
-├── app/                          # Hlavní složka aplikace obsahující Home a RootLayout stránky
-├── components/                   # Složka pro komponenty
-├── public/                       # Složka pro statické soubory (ikony, manifest, city.list.json)
-├── hooks/                        # Složka pro custom hooky
-├── store/                        # Složka pro Redux store
-│   ├── slices/                   # Složka obsahující Redux slice soubory pro různé části stavu
-│   │   ├── ui-slice.ts           # Slice pro správu stavu uživatelského rozhraní
-│   │   ├── city-slice.ts         # Slice pro správu stavu měst a vyhledávání
-│   │   ├── geo-slice.ts          # Slice pro správu geografických souřadnic (polohy)
-│   │   └── weather-slice.ts      # Slice pro správu stavu předpovědi počasí
-│   └── thunks/                   # Redux thunks pro API volání a asynchronní operace
-│       ├── fetch-all-cities.ts   # Thunk pro načtení všech dostupných měst
-│       ├── fetch-coordinates.ts  # Thunk pro získání geografických souřadnic uživatele
-│       ├── fetch-weather-data.ts # Thunk pro načtení dat o počasí na základě souřadnic
-│       └── filter-cities.ts      # Thunk pro filtrování měst na základě vstupu uživatele
-└── utils/                        # Utility funkce a pomocné soubory pro podporu aplikace
+app/          stránka, layout a API routy
+components/   hlavička s vyhledáváním, karty s předpovědí a graf
+data/         seznam měst z OpenWeatherMap
+hooks/        detekce mobilu a scrollování
+store/        Redux store: slices a thunky pro polohu, počasí a vyhledávání
+utils/        typy, metadata a pomocné funkce
 ```
-
-## Klíčové technologie
-
-- [x] **Next.js**: React framework pro server-side rendering a statické generování stránek.
-- [x] **TypeScript**: Přidává typovou bezpečnost do JavaScriptu.
-- [x] **Tailwind CSS**: Moderní CSS framework pro rychlé a efektivní stylování komponent.
-- [x] **Redux**: Správa globálního stavu aplikace.
-- [x] **Chart.js**: Knihovna pro tvorbu grafů (vizualizace teplot).
 
 ## Autor
 
-**Petr Grabovský**
-[GitHub](https://github.com/PetrGrabovsky)
+Petr Grabovský, [GitHub](https://github.com/PetrGrabovsky)
