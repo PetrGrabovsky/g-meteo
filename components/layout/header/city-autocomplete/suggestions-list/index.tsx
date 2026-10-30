@@ -34,7 +34,7 @@ export default function SuggestionsList({ citySuggestions, selectedIndex, handle
       {citySuggestions.length > 0 && (
         <div
           className={clsx(
-            'absolute z-10 mt-2 w-full overflow-hidden rounded-lg',
+            'absolute right-0 z-10 mt-2 w-64 overflow-hidden rounded-lg',
             'scrollable animate-fadeIn border border-gray-200 bg-white shadow-lg'
           )}
         >
@@ -63,7 +63,7 @@ export default function SuggestionsList({ citySuggestions, selectedIndex, handle
                   'hover:bg-blue-500 hover:text-white'
                 )}
               >
-                <span className="w-full text-left">{city.name}</span>
+                <span className="min-w-0 flex-1 text-left wrap-break-word">{city.name}</span>
                 <div
                   className={clsx(
                     'ml-2 shrink-0 rounded-full bg-blue-500 text-white',
