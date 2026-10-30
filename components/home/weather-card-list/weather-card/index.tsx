@@ -2,8 +2,7 @@ import { WeatherDayRecord } from '@/utils/types';
 import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useMemo } from 'react';
-import { isToday } from '@/utils/helpers';
-import { getDescriptionFromIcon } from '@/utils/helpers';
+import { getDescriptionFromIcon, isToday, parseLocalDate } from '@/utils/helpers';
 
 interface WeatherCardProps {
   record: WeatherDayRecord;
@@ -13,7 +12,7 @@ interface WeatherCardProps {
 }
 
 const WeatherCard: React.FC<WeatherCardProps> = React.memo(({ record, isActive, onMouseEnter, onMouseLeave }) => {
-  const date = useMemo(() => new Date(record.date), [record.date]);
+  const date = useMemo(() => parseLocalDate(record.date), [record.date]);
   const weekday = useMemo(() => date.toLocaleDateString('cs-CZ', { weekday: 'long' }), [date]);
   const fullDate = useMemo(() => date.toLocaleDateString('cs-CZ'), [date]);
   const isDateToday = useMemo(() => isToday(date), [date]);

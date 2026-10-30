@@ -31,11 +31,9 @@ const getMostCommonIcon = (icons: string[]): string => {
 const fetchWeatherFromApi = async (
   latitude: number,
   longitude: number,
-  apiKey: string
+  signal: AbortSignal
 ): Promise<WeatherForecastResponse> => {
-  const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
-  );
+  const response = await fetch(`/api/forecast?lat=${latitude}&lon=${longitude}`, { signal });
 
   if (!response.ok) throw new Error('Nepodařilo se načíst data o počasí');
 
@@ -49,8 +47,9 @@ const processWeatherData = (data: WeatherForecastResponse): WeatherState['dailyR
     { temps: number[]; humidities: number[]; windSpeeds: number[]; icons: string[] }
   > = {};
 
-  data.list.forEach(({ dt_txt, main, wind, weather }) => {
-    const date = dt_txt.split(' ')[0];
+  data.list.forEach(({ dt, main, wind, weather }) => {
+    // Den podle místního času města (dt je v UTC, timezone je posun v sekundách)
+    const date = new Date((dt + data.city.timezone) * 1000).toISOString().split('T')[0];
 
     // Inicializace prázdné struktury pro každý den
     processedRecords[date] = processedRecords[date] || {
@@ -83,15 +82,13 @@ const processWeatherData = (data: WeatherForecastResponse): WeatherState['dailyR
 // Thunk pro volání API
 export const fetchWeatherData = createAsyncThunk(
   'weather/fetchWeatherData',
-  async (_, { getState, rejectWithValue }) => {
+  async (_, { getState, rejectWithValue, signal }) => {
     const { coordinates } = (getState() as RootState).geo;
 
     if (!coordinates) return rejectWithValue('Souřadnice nejsou k dispozici');
 
-    const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY || '15b747ab3fff0cc5a5ad3fd970ed43e6';
-
     try {
-      const data = await fetchWeatherFromApi(coordinates.latitude, coordinates.longitude, apiKey);
+      const data = await fetchWeatherFromApi(coordinates.latitude, coordinates.longitude, signal);
       const dailyRecords = processWeatherData(data);
 
       return {

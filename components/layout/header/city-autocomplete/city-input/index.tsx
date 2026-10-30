@@ -21,13 +21,12 @@ export default function CityInput({
   const dispatch = useAppDispatch();
 
   const searchInput = useAppSelector((state) => state.city.searchInput);
-  const cityLoading = useAppSelector((state) => state.city.loading);
-  const cityError = useAppSelector((state) => state.city.error);
   const weatherLoading = useAppSelector((state) => state.weather.loading);
   const isMobile = useAppSelector((state) => state.ui.isMobile);
 
   const cityInputRef = useRef<HTMLInputElement>(null);
-  const isLoading = cityLoading || weatherLoading;
+  const isExpanded = citySuggestions.length > 0;
+  const isLoading = weatherLoading;
 
   // Autofocus na input pouze na větších zařízeních
   useEffect(() => {
@@ -66,8 +65,6 @@ export default function CityInput({
   };
 
   const getPlaceholder = (): string => {
-    if (cityError) return '❌';
-    if (cityLoading) return 'Načítám města...';
     if (weatherLoading) return 'Načítám předpověď...';
     return 'Zadejte město...';
   };
@@ -86,10 +83,11 @@ export default function CityInput({
         onKeyDown={handleKeyDown}
         onBlur={handleInputBlur}
         placeholder={getPlaceholder()}
-        disabled={isLoading || !!cityError}
-        maxLength={20}
+        disabled={isLoading}
+        role="combobox"
+        aria-expanded={isExpanded}
         aria-autocomplete="list"
-        aria-controls="citySuggestions"
+        aria-controls={isExpanded ? 'citySuggestions' : undefined}
         aria-activedescendant={selectedIndex !== null ? `suggestion-${selectedIndex}` : undefined}
         className={clsx(
           'w-full rounded-lg bg-blue-500/50 p-2 text-white transition placeholder:text-white',

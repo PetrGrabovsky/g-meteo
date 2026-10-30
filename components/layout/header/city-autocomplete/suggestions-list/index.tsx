@@ -33,15 +33,19 @@ export default function SuggestionsList({ citySuggestions, selectedIndex, handle
     <>
       {citySuggestions.length > 0 && (
         <div
-          id="citySuggestions"
-          role="listbox"
-          aria-labelledby="cityInput"
           className={clsx(
             'absolute z-10 mt-2 w-full overflow-hidden rounded-lg',
             'scrollable animate-fadeIn border border-gray-200 bg-white shadow-lg'
           )}
         >
-          <ul ref={suggestionsListRef} onMouseDown={handleMouseDownOnList} className="max-h-80 overflow-y-auto pr-2">
+          <ul
+            id="citySuggestions"
+            ref={suggestionsListRef}
+            role="listbox"
+            aria-label="Návrhy měst"
+            onMouseDown={handleMouseDownOnList}
+            className="max-h-80 overflow-y-auto pr-2"
+          >
             {citySuggestions.map((city, index) => (
               <li
                 id={`suggestion-${index}`}

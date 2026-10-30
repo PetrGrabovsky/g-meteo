@@ -25,6 +25,9 @@ const weatherSlice = createSlice({
         state.dailyRecords = action.payload.dailyRecords;
       })
       .addCase(fetchWeatherData.rejected, (state, action) => {
+        // Zrušený požadavek nahradil novější, jeho výsledek se ignoruje
+        if (action.meta.aborted) return;
+
         state.loading = false;
         state.error = action.payload as string;
       });

@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { setSearchInput, setCitySuggestions } from '@/store/slices/city-slice';
 import { setCoordinates } from '@/store/slices/geo-slice';
-import { fetchAllCities } from '@/store/thunks/fetch-all-cities';
 import { City } from '@/utils/weather-api-types';
 import CityInput from './city-input';
 import SuggestionsList from './suggestions-list';
@@ -10,14 +9,8 @@ import SuggestionsList from './suggestions-list';
 export default function CityAutocomplete() {
   const dispatch = useAppDispatch();
   const citySuggestions = useAppSelector((state) => state.city.citySuggestions);
-  const allCities = useAppSelector((state) => state.city.allCities);
   const containerRef = useRef<HTMLDivElement>(null); // Pro detekci kliknutí mimo komponentu
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null); // Aktuálně vybraný návrh
-
-  // Načte města při prvním vykreslení
-  useEffect(() => {
-    if (!allCities.length) dispatch(fetchAllCities());
-  }, [dispatch, allCities.length]);
 
   // Kliknutí mimo komponentu uzavře návrhy
   useEffect(() => {
@@ -42,16 +35,7 @@ export default function CityAutocomplete() {
   };
 
   return (
-    <div
-      ref={containerRef}
-      role="combobox"
-      aria-expanded={citySuggestions.length > 0}
-      aria-haspopup="listbox"
-      aria-owns="citySuggestions"
-      aria-label="Vyhledávání měst"
-      className="relative w-48 animate-fadeIn"
-      tabIndex={-1}
-    >
+    <div ref={containerRef} className="relative w-48 animate-fadeIn">
       <CityInput
         selectedIndex={selectedIndex}
         setSelectedIndex={setSelectedIndex}

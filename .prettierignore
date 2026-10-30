@@ -5,6 +5,7 @@ dist/
 .next/
 coverage/
 public/
+data/
 
 # Ignorování specifických souborů
 yarn.lock

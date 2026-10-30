@@ -8,15 +8,16 @@ interface GeoState {
   error: string | null;
 }
 
-const initialState: GeoState = {
-  coordinates: null,
-  loading: true,
-  error: null,
-};
-
 const PRAGUE_COORDINATES: Coordinates = {
   latitude: 50.083328,
   longitude: 14.46667,
+};
+
+// Praha se ukáže hned, poloha uživatele ji nahradí, až (a pokud) ji povolí
+const initialState: GeoState = {
+  coordinates: PRAGUE_COORDINATES,
+  loading: true,
+  error: null,
 };
 
 const geoSlice = createSlice({
@@ -40,7 +41,6 @@ const geoSlice = createSlice({
       .addCase(fetchCoordinates.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
-        state.coordinates = PRAGUE_COORDINATES;
       });
   },
 });

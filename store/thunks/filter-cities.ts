@@ -3,31 +3,42 @@ import { setCitySuggestions } from '../slices/city-slice';
 import { debounce } from 'lodash';
 import { City } from '@/utils/weather-api-types';
 
-// Vrací města na základě vstupu
-const filterCitiesByInput = (allCities: City[], searchInput: string): City[] => {
-  const trimmedSearchInput = searchInput.trim().toLowerCase();
+let abortController: AbortController | null = null;
 
-  if (!trimmedSearchInput) return [];
+// Vrací města na základě vstupu (hledá se na serveru)
+const fetchCitiesByInput = async (searchInput: string, signal: AbortSignal): Promise<City[]> => {
+  const response = await fetch(`/api/cities?q=${encodeURIComponent(searchInput)}`, { signal });
 
-  return allCities.filter((city) => city.name.toLowerCase().startsWith(trimmedSearchInput)).slice(0, 10);
+  if (!response.ok) throw new Error('Nepodařilo se načíst města');
+
+  return response.json();
 };
 
 // Debounced funkce pro optimalizaci výkonu
-const debouncedFilterCities = debounce((dispatch: AppDispatch, getState: () => RootState) => {
-  const {
-    city: { allCities, searchInput },
-  } = getState();
+const debouncedFilterCities = debounce(async (dispatch: AppDispatch, getState: () => RootState) => {
+  const searchInput = getState().city.searchInput.trim();
 
-  const filteredCities = filterCitiesByInput(allCities, searchInput);
+  // Zruší předchozí požadavek, aby starší odpověď nepřepsala novější
+  abortController?.abort();
 
-  dispatch(setCitySuggestions(filteredCities));
+  if (!searchInput) {
+    dispatch(setCitySuggestions([]));
+    return;
+  }
+
+  abortController = new AbortController();
+
+  try {
+    const filteredCities = await fetchCitiesByInput(searchInput, abortController.signal);
+
+    // Mezitím mohl uživatel vstup změnit nebo město vybrat
+    if (getState().city.searchInput.trim() === searchInput) dispatch(setCitySuggestions(filteredCities));
+  } catch {
+    // Zrušený nebo neúspěšný požadavek návrhy nemění
+  }
 }, 500);
 
 // Thunk pro filtrování měst
 export const filterCities = () => (dispatch: AppDispatch, getState: () => RootState) => {
-  const { allCities } = getState().city;
-
-  if (!allCities.length) return;
-
   debouncedFilterCities(dispatch, getState);
 };

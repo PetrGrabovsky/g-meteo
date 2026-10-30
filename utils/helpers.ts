@@ -1,3 +1,9 @@
+// Datum RRRR-MM-DD v místním čase (new Date('RRRR-MM-DD') by ho bralo jako UTC a západně od UTC ukázalo předchozí den)
+export const parseLocalDate = (date: string): Date => {
+  const [year, month, day] = date.split('-').map(Number);
+  return new Date(year, month - 1, day);
+};
+
 export const isToday = (dateToCheck: Date): boolean => {
   const today = new Date();
   return (

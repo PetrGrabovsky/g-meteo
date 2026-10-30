@@ -52,5 +52,7 @@ export interface WeatherForecastResponse {
   message: number;
   cnt: number;
   list: WeatherListEntry[];
-  city: City;
+  city: City & {
+    timezone: number;
+  };
 }

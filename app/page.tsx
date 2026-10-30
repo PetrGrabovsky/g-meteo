@@ -20,7 +20,8 @@ export default function Home() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchWeatherData());
+    const request = dispatch(fetchWeatherData());
+    return () => request.abort();
   }, [dispatch, coordinates]);
 
   if (weatherError) {

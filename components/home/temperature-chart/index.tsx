@@ -1,5 +1,6 @@
 import { Line } from 'react-chartjs-2';
 import { WeatherDayRecord } from '@/utils/types';
+import { parseLocalDate } from '@/utils/helpers';
 import { useMemo } from 'react';
 import {
   Chart as ChartJS,
@@ -22,7 +23,8 @@ interface TemperatureChartProps {
 
 export default function TemperatureChart({ dailyWeatherRecords }: TemperatureChartProps) {
   const labels = useMemo(
-    () => dailyWeatherRecords.map((record) => new Date(record.date).toLocaleDateString('cs-CZ', { weekday: 'long' })),
+    () =>
+      dailyWeatherRecords.map((record) => parseLocalDate(record.date).toLocaleDateString('cs-CZ', { weekday: 'long' })),
     [dailyWeatherRecords]
   );
 
