@@ -25,7 +25,7 @@ const WeatherCard: React.FC<WeatherCardProps> = React.memo(({ record, isActive, 
       aria-labelledby={`weather-${record.date}`}
       role="region"
       tabIndex={0}
-      aria-label={`Předpověď na ${fullDate}, ${translatedDescription}, teplota ${record.temp} °C, vlhkost ${record.humidity}%`}
+      aria-label={`Předpověď na ${fullDate}, ${translatedDescription}, teplota až ${record.tempMax} °C, v noci ${record.tempMin} °C, vlhkost ${record.humidity}%`}
       className={clsx(
         isActive ? 'scale-105 bg-white/30 shadow-lg' : 'bg-white/20 hover:scale-105 hover:bg-white/30',
         isDateToday && 'text-blue-700',
@@ -43,9 +43,12 @@ const WeatherCard: React.FC<WeatherCardProps> = React.memo(({ record, isActive, 
       </header>
       <hr className="my-3 border-t border-white/20" />
       <div className="mb-4 flex items-center justify-between sm:flex-col sm:justify-center">
-        <p className="mb-1 text-4xl font-bold" aria-live="polite">
-          {record.temp}°C
-        </p>
+        <div className="mb-1 flex flex-col sm:items-center">
+          <p className="text-4xl font-bold" aria-live="polite">
+            {record.tempMax}°C
+          </p>
+          <p className="mt-1 text-lg opacity-80">noc {record.tempMin}°C</p>
+        </div>
         <div className="flex flex-col items-center justify-center">
           <Image
             src={`https://openweathermap.org/img/wn/${record.icon}@2x.png`}

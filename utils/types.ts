@@ -5,7 +5,8 @@ export interface Coordinates {
 
 export interface WeatherDayRecord {
   date: string;
-  temp: number;
+  tempMax: number;
+  tempMin: number;
   humidity: number;
   windSpeed: number;
   icon: string;

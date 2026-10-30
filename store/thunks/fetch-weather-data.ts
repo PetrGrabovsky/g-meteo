@@ -3,9 +3,16 @@ import { WeatherState } from '@/utils/types';
 import { WeatherForecastResponse } from '@/utils/weather-api-types';
 import { RootState } from '../store';
 
+const FORECAST_DAYS = 5;
+// API vrací měření po 3 hodinách, celý den jich má 8
+const MIN_MEASUREMENTS_PER_DAY = 4;
+
+// Zaokrouhlení na jedno desetinné místo
+const roundValue = (value: number): number => parseFloat(value.toFixed(1));
+
 // Výpočet průměrné hodnoty
 const calculateAverageValue = (values: number[]): number => {
-  return parseFloat((values.reduce((sum, val) => sum + val, 0) / values.length).toFixed(1));
+  return roundValue(values.reduce((sum, val) => sum + val, 0) / values.length);
 };
 
 // Získání nejčastější ikony
@@ -67,16 +74,21 @@ const processWeatherData = (data: WeatherForecastResponse): WeatherState['dailyR
   });
 
   // Zpracování dat a vrácení záznamů pro každý den
-  return Object.keys(processedRecords).map((date) => {
-    const record = processedRecords[date];
-    return {
-      date,
-      temp: calculateAverageValue(record.temps),
-      humidity: calculateAverageValue(record.humidities),
-      windSpeed: calculateAverageValue(record.windSpeeds),
-      icon: getMostCommonIcon(record.icons),
-    };
-  });
+  // Dny s méně než polovinou měření (zbytek dneška, začátek posledního dne) by ukazovaly zkreslené hodnoty
+  return Object.keys(processedRecords)
+    .filter((date) => processedRecords[date].temps.length >= MIN_MEASUREMENTS_PER_DAY)
+    .slice(0, FORECAST_DAYS)
+    .map((date) => {
+      const record = processedRecords[date];
+      return {
+        date,
+        tempMax: roundValue(Math.max(...record.temps)),
+        tempMin: roundValue(Math.min(...record.temps)),
+        humidity: Math.round(calculateAverageValue(record.humidities)),
+        windSpeed: calculateAverageValue(record.windSpeeds),
+        icon: getMostCommonIcon(record.icons),
+      };
+    });
 };
 
 // Thunk pro volání API

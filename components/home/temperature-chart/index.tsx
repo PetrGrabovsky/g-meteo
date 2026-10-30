@@ -33,8 +33,8 @@ export default function TemperatureChart({ dailyWeatherRecords }: TemperatureCha
       labels,
       datasets: [
         {
-          label: 'Teplota (°C)',
-          data: dailyWeatherRecords.map((record) => record.temp),
+          label: 'Max. teplota',
+          data: dailyWeatherRecords.map((record) => record.tempMax),
           borderColor: 'rgba(75, 192, 192, 1)',
           backgroundColor: 'rgba(75, 192, 192, 0.2)',
           fill: true,
@@ -42,6 +42,14 @@ export default function TemperatureChart({ dailyWeatherRecords }: TemperatureCha
           pointHoverRadius: 15,
           pointHoverBackgroundColor: 'rgba(60, 155, 155, 1)',
           pointHoverBorderColor: 'rgba(55, 150, 150, 0.8)',
+        },
+        {
+          label: 'Min. teplota',
+          data: dailyWeatherRecords.map((record) => record.tempMin),
+          borderColor: 'rgba(147, 197, 253, 1)',
+          backgroundColor: 'rgba(147, 197, 253, 1)',
+          pointRadius: 6,
+          pointHoverRadius: 10,
         },
       ],
     }),
@@ -53,7 +61,9 @@ export default function TemperatureChart({ dailyWeatherRecords }: TemperatureCha
       responsive: true,
       plugins: {
         legend: {
-          display: false,
+          labels: {
+            color: 'rgba(255, 255, 255, 0.8)',
+          },
         },
         tooltip: {
           displayColors: false,
@@ -64,7 +74,7 @@ export default function TemperatureChart({ dailyWeatherRecords }: TemperatureCha
             size: 15,
           },
           callbacks: {
-            label: (context: TooltipItem<'line'>) => `${context.raw} °C`,
+            label: (context: TooltipItem<'line'>) => `${context.dataset.label}: ${context.raw} °C`,
           },
         },
       },
