@@ -1,9 +1,14 @@
 import { Metadata } from 'next';
 
+const title = 'Gmeteo - předpověď počasí na 5 dní pro celý svět';
+const description =
+  'Předpověď počasí na 5 dní pro jakékoli město na světě nebo pro vaši polohu: denní maximum a noční minimum teploty, vlhkost a vítr.';
+
+// Open Graph a Twitter karta dávají odkazu náhled na sociálních sítích (obrázek je app/opengraph-image.png).
 export const metadata: Metadata = {
-  title: 'Gmeteo - předpověď počasí na 5 dní pro celý svět',
-  description:
-    'S aplikací Gmeteo získáte přesnou a aktuální předpověď počasí na 5 dní pro libovolné místo na světě. Stačí zadat své město nebo povolit určování polohy a okamžitě se dozvíte, jaké počasí vás čeká.',
+  metadataBase: new URL('https://g-meteo-eight.vercel.app'),
+  title,
+  description,
   keywords: [
     'počasí',
     'předpověď',
@@ -33,10 +38,12 @@ export const metadata: Metadata = {
     },
   ],
   openGraph: {
-    title: 'Gmeteo - Předpověď počasí na 5 dní pro celý svět',
-    description:
-      'S aplikací Gmeteo získáte přesnou a aktuální předpověď počasí na 5 dní pro libovolné místo na světě. Stačí zadat své město nebo povolit určování polohy a okamžitě se dozvíte, jaké počasí vás čeká.',
-    url: 'https://g-meteo-eight.vercel.app/',
     type: 'website',
+    siteName: 'Gmeteo',
+    locale: 'cs_CZ',
+    url: '/',
+    title,
+    description,
   },
+  twitter: { card: 'summary_large_image', title, description },
 };
