@@ -1,27 +1,38 @@
-# Gmeteo
+# Gmeteo – 5-Day Weather Forecast
 
-Předpověď počasí na 5 dní pro libovolné město na světě. Po otevření ukáže Prahu, a pokud povolíte polohu, přepne se na místo, kde jste. Jiné město najdete přes vyhledávání v hlavičce.
+A 5-day weather forecast for any city in the world. It opens on Prague and, if you allow location access, switches to where you are. Any other city is one search away in the header. The interface is in Czech.
 
-Aplikace běží na [g-meteo-eight.vercel.app](https://g-meteo-eight.vercel.app).
+**Live demo:** https://g-meteo-eight.vercel.app
 
-![Gmeteo](docs/screenshot.png)
+![Gmeteo showing the forecast for Prague](docs/screenshot.png)
 
-## Co umí
+I wrote Gmeteo in September 2024 while learning to program. In October 2026 I upgraded it with Claude Code to Next.js 16 and React 19 and fixed it: city search moved to the server, so the browser no longer downloads almost 42 MB of city data, the cards show the daily high and the overnight low instead of an average of all readings, forecast days no longer shift across time zones, and the page can be zoomed on mobile.
 
-- předpověď na 5 dní: denní a noční teplota, vlhkost, vítr a ikona počasí
-- graf s průběhem maximálních a minimálních teplot
-- vyhledávání ve zhruba 200 000 městech, funguje i bez diakritiky („usti“ najde Ústí nad Labem)
-- ovládání vyhledávání z klávesnice (šipky, Enter, Esc)
+## Features
 
-## Technologie
+- 5-day forecast: daytime high, overnight low, humidity, wind and a weather icon
+- A chart of the daily highs and lows
+- Search across about 200,000 cities that ignores diacritics („usti“ finds Ústí nad Labem)
+- Keyboard control of the search (arrow keys, Enter, Esc)
 
-Next.js 16 (App Router), React 19, TypeScript, Redux Toolkit, Tailwind CSS 4 a Chart.js. Data o počasí jsou z [OpenWeatherMap](https://openweathermap.org/).
+## Tech Stack
 
-Předpověď i vyhledávání měst jdou přes API routy v Next.js (`app/api/forecast`, `app/api/cities`). API klíč tak zůstává na serveru a prohlížeč nemusí stahovat celý seznam měst, který má přes 40 MB.
+| Area      | Technology                                           |
+| --------- | ---------------------------------------------------- |
+| Framework | Next.js 16 (App Router, Route Handlers), React 19    |
+| State     | Redux Toolkit (slices and thunks)                    |
+| Styling   | Tailwind CSS 4                                       |
+| Charts    | Chart.js with react-chartjs-2                        |
+| Data      | [OpenWeatherMap](https://openweathermap.org/) API    |
+| Tooling   | TypeScript, ESLint 10, Prettier, Husky + lint-staged |
 
-## Spuštění
+## How It Works
 
-Potřebujete Node.js 20.9 nebo novější, [pnpm](https://pnpm.io/) a API klíč z OpenWeatherMap (stačí bezplatný).
+The forecast and the city search go through Next.js Route Handlers (`app/api/forecast`, `app/api/cities`). The OpenWeatherMap API key stays on the server, and the browser never has to load the full city list.
+
+## Getting Started
+
+Requirements: Node.js 24, [pnpm](https://pnpm.io/) and an OpenWeatherMap API key (the free plan is enough).
 
 ```bash
 git clone https://github.com/PetrGrabovsky/g-meteo.git
@@ -30,27 +41,27 @@ pnpm install
 cp .env.example .env.local
 ```
 
-Do `.env.local` doplňte svůj klíč do `WEATHER_API_KEY` a spusťte vývojový server:
+Put your key in `WEATHER_API_KEY` in `.env.local` and start the dev server:
 
 ```bash
 pnpm dev
 ```
 
-Aplikace poběží na [localhost:3000](http://localhost:3000).
+The app runs on [localhost:3000](http://localhost:3000).
 
-Další skripty: `pnpm build` (produkční build), `pnpm lint`, `pnpm typecheck` a `pnpm format`.
+Other scripts: `pnpm build` (production build), `pnpm lint`, `pnpm typecheck` and `pnpm format`.
 
-## Struktura projektu
+## Project Structure
 
 ```
-app/          stránka, layout a API routy
-components/   hlavička s vyhledáváním, karty s předpovědí a graf
-data/         seznam měst z OpenWeatherMap
-hooks/        detekce mobilu a scrollování
-store/        Redux store: slices a thunky pro polohu, počasí a vyhledávání
-utils/        typy, metadata a pomocné funkce
+app/          page, layout and Route Handlers
+components/   header with search, forecast cards and the chart
+data/         city list from OpenWeatherMap
+hooks/        mobile and scroll detection
+store/        Redux store: slices and thunks for location, weather and search
+utils/        types, metadata and helpers
 ```
 
-## Autor
+## Author
 
-Petr Grabovský, [GitHub](https://github.com/PetrGrabovsky)
+Petr Grabovský · [LinkedIn](https://www.linkedin.com/in/petr-grabovsky) · [GitHub](https://github.com/PetrGrabovsky)
